@@ -13,7 +13,6 @@ public class TestBase {
     @BeforeAll
     static void setUp(){
         TestsConfig config = ConfigFactory.create(TestsConfig.class, System.getProperties());
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
         baseUrl = config.getBaseUrl();
     }
