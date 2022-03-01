@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static io.qameta.allure.Allure.step;
+import static org.hamcrest.CoreMatchers.is;
 
 public class GetUserTests extends TestBase{
     private final String api_url = baseUrl + "/api/users/2";
@@ -27,5 +28,17 @@ public class GetUserTests extends TestBase{
         step("Проверяем, что в ответе корректные данные", () -> {});
         assertThat(id).isEqualTo(2);
         assertThat(first_name).isEqualTo("Janet");
+    }
+
+    @Test
+    public void getNonexistentUserTest(){
+
+        String req_url = api_url + "3";
+
+        given()
+                .get(req_url)
+                .then()
+                .statusCode(404)
+                .body(is("{}"));
     }
 }
